@@ -1,0 +1,92 @@
+// ============================================================
+//  ⚠ 자동 생성 파일 — 직접 수정하지 말 것.
+//  scripts/transcribe.mjs 가 녹음을 전사해 만든 자막 비트.
+//  원본 오디오: audio/260927_hmad.mp3
+//  오디오 길이(초): 47.3
+//  생성 시각: 2026-09-27T11:57:08.354Z
+//  script.ts 에서:
+//    import { generatedNarration, AUDIO_FILE, AUDIO_DURATION_SEC } from "./narration.generated";
+// ============================================================
+import type { NarrationBeat } from "../../types";
+
+/** 영상에 삽입할 오디오 파일명 (public 기준 상대경로로 옮겨서 사용) */
+export const AUDIO_FILE = "260927_hmad.mp3";
+export const AUDIO_DURATION_SEC = 47.3;
+
+export const generatedNarration: NarrationBeat[] = [
+  { start: 0, text: "요즘 대한민국" },
+  { start: 0.82, text: "헬스장 근황," },
+  { start: 1.61, text: "러닝 유행이" },
+  { start: 2.15, text: "점차 끝나가고" },
+  { start: 2.82, text: "있습니다." },
+  { start: 3.4, text: "러닝 크루에" },
+  { start: 4.01, text: "대한 시민들의" },
+  { start: 4.71, text: "반감도" },
+  { start: 5.08, text: "많이 생기고" },
+  { start: 5.73, text: "있고" },
+  { start: 5.94, text: "날도 점점" },
+  { start: 6.38, text: "추워져서" },
+  { start: 6.82, text: "초겨울엔" },
+  { start: 7.26, text: "사그라들" },
+  { start: 7.7, text: "분위기입니다." },
+  { start: 8.52, text: "사실 그동안" },
+  { start: 9.16, text: "헬스장 사장님들" },
+  { start: 10.1, text: "진짜 힘들었는데요." },
+  { start: 11.04, text: "헬스장 차릴" },
+  { start: 11.73, text: "때, 요즘은" },
+  { start: 12.22, text: "아스늘, 파나타," },
+  { start: 13.04, text: "헤머 스트렝스" },
+  { start: 13.7, text: "정도는 깔아야" },
+  { start: 14.52, text: "경쟁이 돼서" },
+  { start: 15.28, text: "시설 투자만" },
+  { start: 15.83, text: "최소 10억이" },
+  { start: 16.5, text: "넘습니다." },
+  { start: 17.12, text: "제가 사는" },
+  { start: 17.68, text: "광명만" },
+  { start: 18.1, text: "해도 300평," },
+  { start: 18.89, text: "500평짜리가" },
+  { start: 19.62, text: "건물마다" },
+  { start: 20.03, text: "있을 정도죠." },
+  { start: 20.72, text: "이러니 12개월" },
+  { start: 21.53, text: "회원권을 울며" },
+  { start: 22.2, text: "겨자 먹기로" },
+  { start: 22.88, text: "30만원대까지" },
+  { start: 23.64, text: "내리는데요." },
+  { start: 24.34, text: "아무리" },
+  { start: 24.64, text: "좋아도 60만원대" },
+  { start: 25.43, text: "넘기가 힘듭니다." },
+  { start: 26.3, text: "그런데 러닝하던" },
+  { start: 27.05, text: "사람들이" },
+  { start: 27.49, text: "다시 돌아오기" },
+  { start: 28.15, text: "시작했습니다." },
+  { start: 28.92, text: "운동복에" },
+  { start: 29.39, text: "수건, 샴푸까지" },
+  { start: 30.07, text: "다 주는 헬스장이" },
+  { start: 31.12, text: "사실 개꿀이라는" },
+  { start: 31.92, text: "걸 깨달은" },
+  { start: 32.4, text: "거죠." },
+  { start: 32.68, text: "러닝은 러닝화" },
+  { start: 33.46, text: "챙겨, 먼지" },
+  { start: 34.06, text: "마셔, 와서" },
+  { start: 34.62, text: "또 씻어, 빨래까지" },
+  { start: 35.64, text: "나와서 개" },
+  { start: 36.19, text: "귀찮죠." },
+  { start: 36.66, text: "그러나 헬스장은" },
+  { start: 37.43, text: "몸만 오면" },
+  { start: 37.86, text: "되기" },
+  { start: 38.08, text: "때문에" },
+  { start: 38.43, text: "솔직히 편하긴" },
+  { start: 39.11, text: "편합니다." },
+  { start: 39.86, text: "경쟁하느라" },
+  { start: 40.48, text: "시설은" },
+  { start: 40.82, text: "좋아지는데" },
+  { start: 41.42, text: "가격은" },
+  { start: 41.78, text: "그대로인" },
+  { start: 42.27, text: "가성비도" },
+  { start: 42.74, text: "있죠." },
+  { start: 43.12, text: "결국 소비자" },
+  { start: 43.73, text: "입장에선 헬스장이" },
+  { start: 44.7, text: "최고의 절약이자" },
+  { start: 45.55, text: "이득인" },
+  { start: 45.91, text: "상황입니다." },
+];

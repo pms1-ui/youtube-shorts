@@ -1,0 +1,26 @@
+node_modules/
+out/
+
+# Whisper.cpp 바이너리 + 모델 (대용량, setup-whisper.mjs로 재설치)
+whisper.cpp/
+
+# 전사 중간 산출물
+*.srt
+*.wav.json
+
+# 효과음 트림 백업
+sound-effect/_before_trim/
+
+# 렌더 로그 등 임시
+rlog*.txt
+*.remotion-in-progress
+
+# 녹음/오디오 (개인 녹음 — 로컬에만)
+audio/
+public/audio/
+
+# 프리미어프로 자동생성 캐시(프로젝트 파일 .prproj 만 남기고 캐시는 제외)
+project/Adobe Premiere Pro Audio Previews/
+project/Adobe Premiere Pro Video Previews/
+*.cfa
+*.pek

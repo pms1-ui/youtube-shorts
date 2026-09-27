@@ -1,0 +1,24 @@
+{
+  "name": "youtube-baby-shorts",
+  "version": "1.0.0",
+  "description": "육아 썰형 쇼츠 - Remotion 재현 프로젝트",
+  "scripts": {
+    "dev": "remotion studio",
+    "render:anppan": "node scripts/render.mjs anppan",
+    "render:anppan:thumb": "node scripts/render.mjs anppan --thumb",
+    "render:daehwanjang": "node scripts/render.mjs daehwanjang",
+    "render:daehwanjang:thumb": "node scripts/render.mjs daehwanjang --thumb",
+    "upgrade": "remotion upgrade"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.529",
+    "@remotion/install-whisper-cpp": "^4.0.529",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "remotion": "4.0.529"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.0",
+    "typescript": "5.7.3"
+  }
+}
