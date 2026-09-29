@@ -74,6 +74,10 @@
   - `_sfx.mp3` = 효과음만.
   - 원본 내레이션 오디오는 편집(프리미어)에서 직접 얹는다(렌더에 안 넣음).
 - **G3. 자막 글자는 흰색**(까만 배경 위). 외곽선 불필요.
+- **G4. 레이아웃 상수(현재값, `HeadlineShorts.tsx`)**: 자막을 한 줄 위로 올린 배치.
+  - 중앙 미디어: `MEDIA_TOP=560`, `MEDIA_HEIGHT=790` → 미디어 하단 = 1350.
+  - 하단 자막 블록: `BOTTOM_BLOCK.top=1390`, `height=300`(자막 글자 + 검정 바 공용).
+  - ★ 자막 위치를 조정할 땐 **미디어 하단(MEDIA_TOP+MEDIA_HEIGHT)과 BOTTOM_BLOCK.top이 겹치지 않게** 둘을 같이 움직인다. 자막 글자(NarrationLine)와 검정 바(BottomBar)는 둘 다 BOTTOM_BLOCK.top 기준이라 이 값 하나만 바꾸면 함께 이동한다.
 
 ## H. 툴 사용
 
