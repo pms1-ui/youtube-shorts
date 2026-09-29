@@ -60,37 +60,55 @@ const OUTLINE = (px: number, color = "#000") =>
     `-${px}px 0 0 ${color}`,
   ].join(", ");
 
+// 헤드라인 가용 폭(px): 좌우 30px 패딩 → 1080-60 = 1020
+const HEADLINE_MAX_WIDTH = 1020;
+
+// 한 줄이 주어진 기준 폰트로 가용 폭을 넘치면 폰트를 자동 축소해 "항상 한 줄"에 맞춘다.
+//  · 이탤릭 볼드 + letterSpacing -3 을 감안한 대략적 글자폭 계수(0.92 * fontSize).
+//  · 짧은 줄은 baseSize 그대로, 긴 줄만 줄어든다. (대환장민국 등 짧은 헤드라인은 영향 없음)
+const fitFontSize = (text: string, baseSize: number, maxWidth = HEADLINE_MAX_WIDTH): number => {
+  const perChar = 0.92; // fontSize 대비 평균 글자 폭 비율(한글 이탤릭 볼드 기준 근사)
+  const estWidth = text.length * baseSize * perChar;
+  if (estWidth <= maxWidth) return baseSize;
+  return Math.floor(maxWidth / (text.length * perChar));
+};
+
 // ── 상단 블록: 배경 + 고정 헤드라인 2줄 (독립 영역) ──
-const TopBlock: React.FC<{ line1: string; line2: string }> = ({ line1, line2 }) => (
-  <div
-    style={{
-      position: "absolute",
-      top: TOP_BLOCK.top,
-      left: 0,
-      width: "100%",
-      height: TOP_BLOCK.height,
-      background: TOP_BLOCK.background,
-    }}
-  >
+//  각 줄은 글자 수에 따라 폰트를 자동 축소(fitFontSize)하고 nowrap 으로 강제 한 줄 유지.
+const TopBlock: React.FC<{ line1: string; line2: string }> = ({ line1, line2 }) => {
+  const size1 = fitFontSize(line1, TITLE_SIZE);
+  const size2 = fitFontSize(line2, TITLE_SIZE2);
+  return (
     <div
       style={{
         position: "absolute",
-        top: HEADLINE_TOP - TOP_BLOCK.top,
-        left: 30,
-        right: 30,
-        textAlign: "center",
-        fontFamily: TITLE_FONT, // 에스코어 드림 9 Black
-        fontStyle: "italic",
-        fontWeight: 900,
-        lineHeight: 1.2,
-        letterSpacing: -3,
+        top: TOP_BLOCK.top,
+        left: 0,
+        width: "100%",
+        height: TOP_BLOCK.height,
+        background: TOP_BLOCK.background,
       }}
     >
-      <div style={{ color: "#ffffff", fontSize: TITLE_SIZE, textShadow: OUTLINE(5) }}>{line1}</div>
-      <div style={{ color: "#ffde3d", fontSize: TITLE_SIZE2, textShadow: OUTLINE(5) }}>{line2}</div>
+      <div
+        style={{
+          position: "absolute",
+          top: HEADLINE_TOP - TOP_BLOCK.top,
+          left: 30,
+          right: 30,
+          textAlign: "center",
+          fontFamily: TITLE_FONT, // 에스코어 드림 9 Black
+          fontStyle: "italic",
+          fontWeight: 900,
+          lineHeight: 1.2,
+          letterSpacing: -3,
+        }}
+      >
+        <div style={{ color: "#ffffff", fontSize: size1, textShadow: OUTLINE(5), whiteSpace: "nowrap" }}>{line1}</div>
+        <div style={{ color: "#ffde3d", fontSize: size2, textShadow: OUTLINE(5), whiteSpace: "nowrap" }}>{line2}</div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // ── 하단 자막: 흰 글자만 (배경·외곽선 없음). 배경은 main의 하단 바가 담당. ──
 // sub 파일에선 이 글자만 투명 위에 얹혀 나오고, main의 검정 하단 바 위에 겹쳐진다.

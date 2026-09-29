@@ -1,28 +1,28 @@
 // ============================================================
-//  헬마드 — 대본 (글 2편)  [headline 레이아웃]
-//  주제: 보디빌더가 1년에 쓰는 돈 (음식·보충제·약물, 경량/내추럴 vs 헤비급)
+//  헬마드 — 대본 (글 3편)  [headline 레이아웃]
+//  주제: 요즘 한국인들이 맨몸운동을 선택하는 이유 (가성비·전신운동·홈트)
 //
 //  자막 타이밍은 녹음 전사(narration.generated.ts)의 타임코드 기준.
 //  텍스트는 STT 오인식을 원본 대본으로 교정해 아래에 직접 둔다.
-//  오디오: public/audio/260929.mp3 (48.82초)
-//  인트로 문장("보디빌더가 1년에 쓰는 돈 규모")은 녹음 0~약1.77초에 포함 → 그 구간 자막 없음.
+//  오디오: public/audio/260927_2.mp3 (32.6초)
+//  인트로 문장("요즘 한국인들이 맨몸운동을 선택하는 이유")은 녹음 0~약2.4초에 포함 → 그 구간 자막 없음.
 // ============================================================
 import type { StoryScript } from "../../types";
 import { AUDIO_FILE, AUDIO_DURATION_SEC } from "./narration.generated";
 
 export const helmadScript: StoryScript = {
-  title: "보디빌더가 1년에 쓰는 돈 규모 ㄷㄷ",
+  title: "요즘 한국인들이 맨몸운동을 선택하는 이유 ㄷㄷ",
   views: "0",
   comments: "0",
 
   headline: {
-    line1: "보디빌더가 1년에", // 8자
-    line2: "쓰는 돈 규모 ㄷㄷ", // 9자
+    line1: "요즘 한국인들이", // 8자
+    line2: "맨몸운동 하는 이유", // 9자
   },
 
   intro: {
-    lines: ["보디빌더가 1년에", "쓰는 돈 규모 ㄷㄷ"],
-    durationSec: 1.77, // 녹음에서 제목 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
+    lines: ["요즘 한국인들이", "맨몸운동 하는 이유"],
+    durationSec: 2.4, // 녹음에서 제목 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
     sfx: "s11",
   },
 
@@ -31,91 +31,57 @@ export const helmadScript: StoryScript = {
   audioDurationSec: AUDIO_DURATION_SEC,
 
   // ── 자막 트랙: 원본 대본 그대로, 화면 한 줄에 맞게만 쪼갬. 전사 타임코드 기준. ──
-  //    (STT 오인식 교정: 필 힐스→필 히스, 테스토스세로→테스토스테론,
-  //     성장으로문→성장호르몬, 낮습니다→낫습니다 등)
+  //    (STT 오인식 교정: 한상→한 쌍, 땅 그 부부→땅끄부부, 굽고→굳고)
   narration: [
-    { start: 1.77, text: "보디빌더들은" },
-    { start: 2.28, text: "일단 먹는 양부터가" },
-    { start: 3.32, text: "상식을 벗어납니다" },
+    { start: 2.4, text: "요즘 헬스장보다는" },
+    { start: 3.54, text: "집에서 맨몸운동 하는" },
+    { start: 4.57, text: "사람들이" },
+    { start: 5.06, text: "확 늘었습니다" },
 
-    { start: 4.4, text: "올림피아 우승자" },
-    { start: 5.48, text: "삼손 다우다는" },
-    { start: 6.03, text: "본인 밥값만" },
-    { start: 6.65, text: "한 달에 640만 원" },
-    { start: 7.58, text: "나온다고 밝혔죠" },
+    { start: 5.84, text: "왜일까요?" },
 
-    { start: 8.84, text: "하루 단백질만" },
-    { start: 9.52, text: "300그램씩 욱여넣습니다" },
+    { start: 6.38, text: "일단 푸쉬업, 풀업," },
+    { start: 7.22, text: "덤벨 한 쌍 갖다놓고" },
+    { start: 8.48, text: "어깨운동, 버피" },
+    { start: 9.64, text: "이런 것들만 몇 가지" },
+    { start: 10.96, text: "집에서 꾸준히 해도" },
+    { start: 11.58, text: "일반인 수준에선" },
+    { start: 12.6, text: "차고 넘칩니다" },
 
-    { start: 10.8, text: "올림피아 7관왕 필 히스는" },
-    { start: 12.4, text: "음식값만 1년에" },
-    { start: 13.13, text: "2천만 원 넘게" },
-    { start: 13.78, text: "썼다고 했고요" },
+    { start: 13.48, text: "당장 땅끄부부 같은" },
+    { start: 14.72, text: "홈트 영상 하나만" },
+    { start: 15.58, text: "따라 해봐도" },
+    { start: 16.22, text: "20분 만에 땀이" },
+    { start: 17.15, text: "쭉쭉 나고" },
+    { start: 17.73, text: "체지방 불타는 게" },
+    { start: 18.44, text: "느껴지죠" },
 
-    { start: 14.7, text: "이게 끝이 아닙니다" },
+    { start: 19.12, text: "러닝은 때때로" },
+    { start: 19.85, text: "하체에 부담을 준다면" },
+    { start: 21.06, text: "이런 영상 보며" },
+    { start: 21.58, text: "따라하는 건" },
+    { start: 22.35, text: "전신 운동이라" },
+    { start: 23.33, text: "건강에도 더 좋습니다" },
 
-    { start: 15.64, text: "단백질 보충제와" },
-    { start: 16.48, text: "각종 영양제에" },
-    { start: 17.2, text: "최소 500만 원 이상이" },
-    { start: 18.05, text: "붙는데요" },
+    { start: 24.6, text: "특히 회사원이나" },
+    { start: 25.44, text: "학생분들은" },
+    { start: 26.06, text: "집에서 하는 게" },
+    { start: 26.98, text: "시간 대비 가성비가" },
+    { start: 27.9, text: "훨씬 좋긴" },
+    { start: 28.42, text: "하다고들 말하는데요" },
 
-    { start: 19.04, text: "근데 진짜" },
-    { start: 19.48, text: "돈 먹는 하마는" },
-    { start: 20.14, text: "따로 있습니다" },
-
-    { start: 21, text: "바로 약물이죠" },
-
-    { start: 21.76, text: "테스토스테론은" },
-    { start: 22.47, text: "그나마 싼 편이라" },
-    { start: 23.58, text: "1년에 100만 원 안쪽인데요" },
-
-    { start: 24.7, text: "문제는 성장호르몬입니다" },
-
-    { start: 26.06, text: "이거 하나에만" },
-    { start: 26.75, text: "1년에 최대" },
-    { start: 27.27, text: "1,700만 원이" },
-    { start: 28.04, text: "깨진다고 합니다" },
-
-    { start: 28.91, text: "여기에 인슐린," },
-    { start: 29.63, text: "펩타이드까지 쌓으면" },
-
-    { start: 30.72, text: "헤비급 선수는" },
-    { start: 31.36, text: "약값만 1년에" },
-    { start: 32.02, text: "3천만 원을" },
-    { start: 32.79, text: "넘기기도 하죠" },
-
-    { start: 33.68, text: "그나마 약 안 쓰는" },
-    { start: 34.15, text: "내추럴이나" },
-    { start: 35.12, text: "체급 가벼운 선수는" },
-    { start: 36.44, text: "사정이 낫습니다" },
-
-    { start: 37.52, text: "반대로 헤비급" },
-    { start: 38.24, text: "오픈 선수들은" },
-    { start: 39.01, text: "음식도 약도 2배로" },
-    { start: 39.92, text: "들어가서" },
-    { start: 40.45, text: "지출이 폭발합니다" },
-
-    { start: 41.62, text: "근데 웃긴 건" },
-    { start: 42.1, text: "정작 대회에서" },
-    { start: 42.99, text: "받는 상금은" },
-    { start: 43.54, text: "이보다 적은" },
-    { start: 44.14, text: "경우가 태반이라는 겁니다" },
-
-    { start: 45.68, text: "결국 몸도 키우지만" },
-    { start: 46.6, text: "통장을 갈아 넣는" },
-    { start: 47.18, text: "직업인 셈이죠" },
+    { start: 29.6, text: "돈 굳고, 시간 굳고," },
+    { start: 31.05, text: "눈치 볼 것도 없죠" },
   ],
 
   // ── 효과음 전환 타이밍(주제 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
   cuts: [
-    { start: 1.77, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 음식 스케일
-    { start: 8.84, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 단백질/필히스
-    { start: 15.64, photo: "", zoom: "out", sfxOnEnter: "s02", lines: [], source: "" }, // 보충제
-    { start: 19.04, photo: "", zoom: "in", sfxOnEnter: "s05", lines: [], source: "" }, // 약물 등장(반전)
-    { start: 24.7, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // 성장호르몬
-    { start: 28.91, photo: "", zoom: "out", sfxOnEnter: "s14", lines: [], source: "" }, // 인슐린/펩타이드/헤비급
-    { start: 33.68, photo: "", zoom: "in", sfxOnEnter: "s09", lines: [], source: "" }, // 내추럴/경량
-    { start: 37.52, photo: "", zoom: "out", sfxOnEnter: "s07", lines: [], source: "" }, // 헤비급 폭발
-    { start: 41.62, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 반전/마무리
+    { start: 2.4, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 도입(맨몸운동 증가)
+    { start: 5.84, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // 왜일까 전환
+    { start: 6.38, photo: "", zoom: "out", sfxOnEnter: "s01", lines: [], source: "" }, // 종목 나열
+    { start: 13.48, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 땅끄부부 홈트
+    { start: 19.12, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 러닝 비교/전신
+    { start: 24.6, photo: "", zoom: "in", sfxOnEnter: "s07", lines: [], source: "" }, // 회사원/학생 가성비
+    { start: 29.6, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 마무리(돈·시간·눈치)
   ],
 };

@@ -78,6 +78,7 @@
   - 중앙 미디어: `MEDIA_TOP=560`, `MEDIA_HEIGHT=790` → 미디어 하단 = 1350.
   - 하단 자막 블록: `BOTTOM_BLOCK.top=1390`, `height=300`(자막 글자 + 검정 바 공용).
   - ★ 자막 위치를 조정할 땐 **미디어 하단(MEDIA_TOP+MEDIA_HEIGHT)과 BOTTOM_BLOCK.top이 겹치지 않게** 둘을 같이 움직인다. 자막 글자(NarrationLine)와 검정 바(BottomBar)는 둘 다 BOTTOM_BLOCK.top 기준이라 이 값 하나만 바꾸면 함께 이동한다.
+- **G5. 상단 헤드라인은 폰트 자동 축소(fitFontSize)로 항상 한 줄 유지.** `HeadlineShorts.tsx`에 `fitFontSize()`가 있어, 헤드라인 한 줄이 가용 폭(1020px)을 넘치면 폰트를 자동으로 줄이고 `whiteSpace:nowrap`로 강제 한 줄 유지한다. 짧은 헤드라인(대환장민국 등)은 영향 없음. → 헤드라인 문구가 길어도 "이/유"처럼 두 줄로 깨지지 않는다. 그래도 권장 글자수(line1 8~10자, line2 6~9자)는 지키는 게 크기 유지에 좋다.
 
 ## H. 툴 사용
 
