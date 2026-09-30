@@ -1,8 +1,9 @@
 // ============================================================
 //  채널 렌더 헬퍼
-//  · 결과물은 채널별 폴더로: out/<채널한글명>/
-//  · 파일명은 날짜가 앞: "YYMMDD_<채널한글명>_<파트>"
-//    예) out/대환장민국/260927_대환장민국_sub.mov
+//  · 결과물은 채널별 + 편별 하위 폴더로: out/<채널한글명>/<YYMMDD>_<순번>/
+//    예) out/헬마드/260930_01/260930_헬마드_sub.mov
+//    → 한 편(스크립트물) = 하위 폴더 하나. 5종(main/sub/sfx/통짜/썸네일)이 그 안에 모임.
+//  · 순번(2자리)은 같은 날짜 안에서 01, 02, ... 로 증가.
 //  사용법:
 //    node scripts/render.mjs <채널> [옵션]
 //    옵션:
@@ -12,10 +13,13 @@
 //      --sfx      효과음만                                 → _sfx.mp3
 //      --split    --main, --subs, --sfx 모두 렌더 (편집용 3파일)
 //      --thumb    게시물 썸네일 이미지                     → .png
-//  예) node scripts/render.mjs daehwanjang --split
+//      --new      그날의 새 편으로(순번 +1) 새 폴더 생성
+//      --seq=NN   순번을 직접 지정(예: --seq=02)
+//    예) node scripts/render.mjs helmad --split --new
 // ============================================================
 import { execSync } from "child_process";
 import fs from "fs";
+import path from "path";
 
 const CHANNELS = {
   anppan: { comp: "Anppan", label: "안빤엄빠" },
@@ -30,9 +34,11 @@ const isMain = args.includes("--main");
 const isSubs = args.includes("--subs");
 const isSfx = args.includes("--sfx");
 const isSplit = args.includes("--split");
+const isNew = args.includes("--new");
+const seqArg = args.find((a) => a.startsWith("--seq="));
 
 if (!id || !CHANNELS[id]) {
-  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--subs|--split|--thumb]");
+  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--subs|--sfx|--split|--thumb|--new|--seq=NN]");
   process.exit(1);
 }
 
@@ -44,8 +50,41 @@ const yymmdd =
   String(d.getMonth() + 1).padStart(2, "0") +
   String(d.getDate()).padStart(2, "0");
 
-// 채널별 폴더: out/<채널한글명>/
-const outDir = `out/${label}`;
+const channelDir = path.join("out", label);
+fs.mkdirSync(channelDir, { recursive: true });
+
+// 같은 날짜(YYMMDD) 하위 폴더 목록에서 순번 계산
+function existingSeqDirs() {
+  return fs
+    .readdirSync(channelDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory() && new RegExp(`^${yymmdd}_\\d{2}$`).test(e.name))
+    .map((e) => e.name)
+    .sort();
+}
+
+function resolveSeq() {
+  // 1) --seq=NN 명시되면 그대로
+  if (seqArg) {
+    const n = seqArg.split("=")[1].padStart(2, "0");
+    return n;
+  }
+  const dirs = existingSeqDirs();
+  // 2) --new 면 (최대 순번 + 1), 없으면 01
+  if (isNew) {
+    if (dirs.length === 0) return "01";
+    const maxN = Math.max(...dirs.map((n) => parseInt(n.slice(-2), 10)));
+    return String(maxN + 1).padStart(2, "0");
+  }
+  // 3) 기본: 그날 가장 최근 수정된 편 폴더 재사용(같은 편 재렌더). 없으면 01 새로.
+  if (dirs.length === 0) return "01";
+  const latest = dirs
+    .map((n) => ({ n, mtime: fs.statSync(path.join(channelDir, n)).mtimeMs }))
+    .sort((a, b) => b.mtime - a.mtime)[0].n;
+  return latest.slice(-2);
+}
+
+const seq = resolveSeq();
+const outDir = path.join(channelDir, `${yymmdd}_${seq}`);
 fs.mkdirSync(outDir, { recursive: true });
 
 // 파일명 접두: "YYMMDD_<채널한글명>"  → 파트/확장자는 각 함수에서 붙임
@@ -58,27 +97,29 @@ function run(cmd) {
 
 // 상단+인트로+하단바 (소리·미디어 없음)
 function renderMain() {
-  const out = `${outDir}/${base}_main.mp4`;
+  const out = path.join(outDir, `${base}_main.mp4`);
   run(`npx remotion render ${comp}Main "${out}" --crf=18`);
   console.log("✓ main(상단바+인트로+하단바):", out);
 }
 
 // 자막만 (투명 배경) — ProRes 4444 알파(mov)
 function renderSubs() {
-  const out = `${outDir}/${base}_sub.mov`;
+  const out = path.join(outDir, `${base}_sub.mov`);
   run(`npx remotion render ${comp}Subs "${out}" --codec=prores --prores-profile=4444 --pixel-format=yuva444p10le --image-format=png`);
   console.log("✓ 자막(투명 mov):", out);
 }
 
 // 효과음만 (mp3)
 function renderSfx() {
-  const out = `${outDir}/${base}_sfx.mp3`;
+  const out = path.join(outDir, `${base}_sfx.mp3`);
   run(`npx remotion render ${comp}Sfx "${out}" --codec=mp3`);
   console.log("✓ 효과음(mp3):", out);
 }
 
+console.log(`▶ 출력 폴더: ${outDir}`);
+
 if (isThumb) {
-  const out = `${outDir}/${base}.png`;
+  const out = path.join(outDir, `${base}.png`);
   run(`npx remotion still ${comp}Thumbnail "${out}" --overwrite`);
   console.log("✓ 썸네일:", out);
 } else if (isSplit) {
@@ -93,7 +134,7 @@ if (isThumb) {
   renderSfx();
 } else {
   // 통짜(미리보기)
-  const out = `${outDir}/${base}.mp4`;
+  const out = path.join(outDir, `${base}.mp4`);
   run(`npx remotion render ${comp} "${out}" --crf=18`);
   console.log("✓ 통짜:", out);
 }
