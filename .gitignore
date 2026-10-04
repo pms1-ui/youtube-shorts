@@ -1,5 +1,11 @@
 node_modules/
-out/
+
+# 렌더 결과물은 제외하되, 편별 대본(_script.txt)만 git에 보관
+out/*
+!out/
+out/**
+!out/**/
+!out/**/*_script.txt
 
 # Whisper.cpp 바이너리 + 모델 (대용량, setup-whisper.mjs로 재설치)
 whisper.cpp/

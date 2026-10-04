@@ -36,19 +36,22 @@ const isSfx = args.includes("--sfx");
 const isSplit = args.includes("--split");
 const isNew = args.includes("--new");
 const seqArg = args.find((a) => a.startsWith("--seq="));
+const dateArg = args.find((a) => a.startsWith("--date="));
 
 if (!id || !CHANNELS[id]) {
-  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--subs|--sfx|--split|--thumb|--new|--seq=NN]");
+  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--subs|--sfx|--split|--thumb|--new|--seq=NN|--date=YYMMDD]");
   process.exit(1);
 }
 
 const { comp, label } = CHANNELS[id];
 
 const d = new Date();
-const yymmdd =
-  String(d.getFullYear()).slice(2) +
-  String(d.getMonth() + 1).padStart(2, "0") +
-  String(d.getDate()).padStart(2, "0");
+// --date=YYMMDD 로 지난 편을 재렌더할 수 있다(폴더명·파일명 접두에 사용). 없으면 오늘 날짜.
+const yymmdd = dateArg
+  ? dateArg.split("=")[1]
+  : String(d.getFullYear()).slice(2) +
+    String(d.getMonth() + 1).padStart(2, "0") +
+    String(d.getDate()).padStart(2, "0");
 
 const channelDir = path.join("out", label);
 fs.mkdirSync(channelDir, { recursive: true });
@@ -89,6 +92,45 @@ fs.mkdirSync(outDir, { recursive: true });
 
 // 파일명 접두: "YYMMDD_<채널한글명>"  → 파트/확장자는 각 함수에서 붙임
 const base = `${yymmdd}_${label}`;
+
+// ── 대본 txt 자동 저장 ──
+// script.ts 에서 title/headline/narration 텍스트를 뽑아 편 폴더에 보관한다.
+// (TS를 실행하지 않고 정규식으로 문자열만 추출 → 영상·대본이 한 폴더에 묶임)
+function saveScriptTxt() {
+  try {
+    const scriptPath = path.join("src", "channels", id, "script.ts");
+    if (!fs.existsSync(scriptPath)) return;
+    const src = fs.readFileSync(scriptPath, "utf8");
+
+    const titleM = src.match(/title:\s*"([^"]*)"/);
+    const title = titleM ? titleM[1] : "";
+
+    const hlM = src.match(/headline:\s*\{[^}]*line1:\s*"([^"]*)"[^}]*line2:\s*"([^"]*)"/s);
+    const headline = hlM ? `${hlM[1]}\n${hlM[2]}` : "";
+
+    // narration 블록 안의 text 값들만 순서대로 추출
+    const narrM = src.match(/narration:\s*\[([\s\S]*?)\n\s*\],/);
+    let lines = [];
+    if (narrM) {
+      const re = /text:\s*"([^"]*)"/g;
+      let m;
+      while ((m = re.exec(narrM[1])) !== null) lines.push(m[1]);
+    }
+
+    const txt =
+      `[제목]\n${title}\n\n` +
+      `[인트로/헤드라인]\n${headline}\n\n` +
+      `[본문 자막]\n${lines.join("\n")}\n`;
+
+    const out = path.join(outDir, `${base}_script.txt`);
+    fs.writeFileSync(out, txt, "utf8");
+    console.log("✓ 대본 txt 저장:", out);
+  } catch (e) {
+    console.warn("! 대본 txt 저장 실패(무시):", e.message);
+  }
+}
+
+saveScriptTxt();
 
 function run(cmd) {
   console.log("→", cmd);
