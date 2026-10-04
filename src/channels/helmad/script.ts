@@ -66,12 +66,24 @@ export const helmadScript: StoryScript = {
 
     { start: 23.16, text: "이 흐르는 동작 하나에" },
     { start: 24.22, text: "어깨, 가슴, 삼두가" },
-    { start: 29.89, text: "전부 늘어났다" },
-    { start: 33.93, text: "수축하죠" },
+    { start: 25.71, text: "전부 늘어났다" },
+    { start: 26.21, text: "수축하죠" },
 
-    { start: 37.48, text: "제대로만 하면," },
-    { start: 38.14, text: "기구 하나 없이" },
-    { start: 39.48, text: "상체 전체가 완성되는" },
+    { start: 26.62, text: "제일 중요한 건" },
+    { start: 26.88, text: "손 너비와 팔꿈치입니다" },
+    { start: 28.86, text: "손 너비가 너무 넓거나," },
+    { start: 30.1, text: "동작할 때 팔꿈치를" },
+    { start: 30.98, text: "양옆으로 너무 쫙 벌리면," },
+    { start: 32.38, text: "어깨와 팔꿈치 관절이" },
+    { start: 33.5, text: "큰 무리를 받거든요" },
+
+    { start: 34.42, text: "개수는 한 세트에 10개," },
+    { start: 35.26, text: "3세트부터 시작해" },
+    { start: 36.26, text: "천천히 늘려가면 됩니다" },
+
+    { start: 38.0, text: "제대로만 하면," },
+    { start: 38.66, text: "기구 하나 없이" },
+    { start: 39.41, text: "상체 전체가 완성되는" },
     { start: 40.59, text: "운동이죠" },
   ],
 
@@ -83,6 +95,8 @@ export const helmadScript: StoryScript = {
     { start: 13.58, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 자세 설명
     { start: 19.96, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // 어깨 운동 추가
     { start: 23.16, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 흐르는 동작
-    { start: 37.48, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 마무리
+    { start: 26.62, photo: "", zoom: "in", sfxOnEnter: "s05", lines: [], source: "" }, // 제일 중요(팔꿈치)
+    { start: 34.42, photo: "", zoom: "out", sfxOnEnter: "s03", lines: [], source: "" }, // 개수·세트
+    { start: 38.0, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 마무리
   ],
 };
