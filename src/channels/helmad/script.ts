@@ -1,28 +1,34 @@
 // ============================================================
-//  헬마드 — 대본 (글 6편, 3편 인클라인 워킹)  [headline 레이아웃]
-//  주제: 달리지 않고 체지방 빼는 법 (인클라인 워킹 / 관절 부담↓ 지방연소↑)
+//  헬마드 — 힌두 푸쉬업 (상체 전체를 터는 운동)  [headline 레이아웃]
+//  결과물 폴더: out/헬마드/261004_04/
+//
+//  ★ 헤드라인 ≠ 인트로 (분리 케이스)
+//     - 헤드라인(상단 고정): "미친 강함을 만드는 / 힌두 푸쉬업 방법"
+//     - 인트로(흰 카드, 녹음 맨 앞 낭독): "푸쉬업을 이렇게 했더니 / 상체 전체가 강해졌다고?"
 //
 //  자막 타이밍은 녹음 전사(narration.generated.ts)의 타임코드 기준.
 //  텍스트는 STT 오인식을 원본(녹음에서 실제 말한 내용)으로 교정해 아래에 직접 둔다.
-//  오디오: public/audio/261004.mp3 (36.02초)
-//  인트로 문장("달리지 않고 체지방 미친 듯 빼는 법")은 녹음 0~약2.04초에 포함 → 그 구간 자막 없음.
+//  오디오: public/audio/261004-4-complete.mp3 (41.62초)
+//  인트로 문구는 녹음 0~약2.64초에 낭독 → 그 구간 자막 없음.
 // ============================================================
 import type { StoryScript } from "../../types";
 import { AUDIO_FILE, AUDIO_DURATION_SEC } from "./narration.generated";
 
 export const helmadScript: StoryScript = {
-  title: "달리지 않고 체지방 미친 듯 빼는 법",
+  title: "미친 강함을 만드는 힌두 푸쉬업 (상체 올인원)",
   views: "0",
   comments: "0",
 
+  // 상단 고정 헤드라인 (인트로 카드와 다름)
   headline: {
-    line1: "달리지 않고", // 6자
-    line2: "체지방 빼는 법", // 7자
+    line1: "미친 강함을 만드는", // 9자
+    line2: "힌두 푸쉬업 방법", // 8자
   },
 
+  // 흰 카드 인트로 (녹음 맨 앞 낭독) — 헤드라인과 다른 문구
   intro: {
-    lines: ["달리지 않고", "체지방 미친 듯 빼는 법"],
-    durationSec: 2.04, // 녹음에서 제목 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
+    lines: ["푸쉬업을 이렇게 했더니", "상체 전체가 강해졌다고?"],
+    durationSec: 2.64, // 녹음에서 인트로 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
     sfx: "s11",
   },
 
@@ -31,63 +37,52 @@ export const helmadScript: StoryScript = {
   audioDurationSec: AUDIO_DURATION_SEC,
 
   // ── 자막 트랙: 녹음에서 실제 말한 내용대로, 화면 한 줄에 맞게만 쪼갬. 전사 타임코드 기준. ──
-  //    (STT 오인식 교정: "집에서 최대 50%"의 잘못 낀 "집에서" 제거 → "최대 50% 이상")
+  //    (STT 오인식 교정: 배메기→배밀기, 단원컨대→단언컨대)
   narration: [
-    { start: 2.04, text: "무릎과 발목에는" },
-    { start: 2.92, text: "부담을 거의 안 주면서," },
-    { start: 4.06, text: "체지방은 더 잘 태우는" },
-    { start: 5.04, text: "운동이 있습니다" },
+    { start: 2.64, text: "배밀기라고도 불리는" },
+    { start: 3.3, text: "힌두 푸쉬업은" },
+    { start: 4.44, text: "단언컨대 최고의" },
+    { start: 5.08, text: "종합 전신 운동 중 하나입니다" },
 
-    { start: 5.94, text: "뛸 필요도 없습니다" },
-    { start: 6.86, text: "그냥 걷기만 하면 되죠" },
+    { start: 6.98, text: "어깨, 삼두, 가슴, 승모," },
+    { start: 8.36, text: "등까지 상체를" },
+    { start: 9.14, text: "통째로 털어버리거든요" },
 
-    { start: 8, text: "비밀은 딱 하나," },
-    { start: 8.9, text: "경사입니다" },
+    { start: 10.38, text: "근데 제대로 안 하고" },
+    { start: 11.04, text: "따라하다," },
+    { start: 11.72, text: "팔꿈치 박살내는" },
+    { start: 12.47, text: "분들이 꽤 많습니다" },
 
-    { start: 9.6, text: "뻔한 소리 아니냐구요?" },
-    { start: 10.66, text: "아닙니다" },
+    { start: 13.58, text: "먼저 엉덩이를" },
+    { start: 14.23, text: "하늘로 치켜든" },
+    { start: 14.96, text: "산 모양 자세에서," },
+    { start: 15.98, text: "몸을 바닥에 쓸듯이 넣었다가," },
+    { start: 17.38, text: "가슴을 쭉 들어 올리며" },
+    { start: 18.46, text: "상체를 쓸어 올리는 동작인데," },
 
-    { start: 11.16, text: "평지를 오르막으로" },
-    { start: 12.04, text: "올리는 순간," },
-    { start: 12.64, text: "관절에 실리는 충격은" },
-    { start: 13.91, text: "확 줄어드는데," },
-    { start: 14.7, text: "하체와 엉덩이 개입도는" },
-    { start: 16.43, text: "최대 50% 이상" },
-    { start: 17.46, text: "훨씬 강하게 동원됩니다" },
+    { start: 19.96, text: "여기서 안 세우고" },
+    { start: 20.42, text: "중간에 다시 돌아오면," },
+    { start: 21.98, text: "어깨 운동이 추가됩니다" },
 
-    { start: 18.74, text: "이뿐만이 아닙니다" },
-    { start: 19.64, text: "더 놀라운 사실은," },
-    { start: 20.6, text: "몸이 이 경사를 오를 때" },
-    { start: 21.84, text: "에너지를 지방에서" },
-    { start: 23.12, text: "끌어다 쓰는 비율이" },
-    { start: 23.74, text: "확 올라갑니다" },
+    { start: 23.16, text: "이 흐르는 동작 하나에" },
+    { start: 24.22, text: "어깨, 가슴, 삼두가" },
+    { start: 29.89, text: "전부 늘어났다" },
+    { start: 33.93, text: "수축하죠" },
 
-    { start: 24.54, text: "숨차게 뛸 때보다" },
-    { start: 25.54, text: "오히려 지방을" },
-    { start: 26.21, text: "더 많이 태우는 거죠" },
-
-    { start: 27.16, text: "방법은 간단합니다" },
-    { start: 29.6, text: "러닝머신 경사를" },
-    { start: 30.3, text: "8에서 12도로" },
-    { start: 31.0, text: "설정하고," },
-    { start: 31.6, text: "속도는 시속 5 전후로," },
-    { start: 32.3, text: "딱 30분 걷는 겁니다" },
-
-    { start: 33.02, text: "관절 아파서 못 뛰던" },
-    { start: 34.05, text: "사람도 무리 없이" },
-    { start: 34.97, text: "할 수 있죠" },
+    { start: 37.48, text: "제대로만 하면," },
+    { start: 38.14, text: "기구 하나 없이" },
+    { start: 39.48, text: "상체 전체가 완성되는" },
+    { start: 40.59, text: "운동이죠" },
   ],
 
   // ── 효과음 전환 타이밍(주제 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
   cuts: [
-    { start: 2.04, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 도입(관절부담↓ 지방↑)
-    { start: 5.94, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 그냥 걷기
-    { start: 8, photo: "", zoom: "out", sfxOnEnter: "s10", lines: [], source: "" }, // 비밀=경사
-    { start: 9.6, photo: "", zoom: "in", sfxOnEnter: "s05", lines: [], source: "" }, // 뻔한 소리? 반전
-    { start: 11.16, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 충격↓ 개입↑
-    { start: 18.74, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 더 놀라운 사실
-    { start: 24.54, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 지방 더 태움
-    { start: 27.16, photo: "", zoom: "in", sfxOnEnter: "s06", lines: [], source: "" }, // 방법(이름=인클라인)
-    { start: 33.02, photo: "", zoom: "out", sfxOnEnter: "s07", lines: [], source: "" }, // 마무리
+    { start: 2.64, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 도입(최고의 전신운동)
+    { start: 6.98, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 상체 부위 나열
+    { start: 10.38, photo: "", zoom: "out", sfxOnEnter: "s05", lines: [], source: "" }, // 팔꿈치 주의
+    { start: 13.58, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 자세 설명
+    { start: 19.96, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // 어깨 운동 추가
+    { start: 23.16, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 흐르는 동작
+    { start: 37.48, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 마무리
   ],
 };
