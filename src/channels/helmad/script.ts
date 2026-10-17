@@ -1,34 +1,35 @@
 // ============================================================
-//  헬마드 — L자 다리 올리기(Legs Up The Wall) 편  [headline 레이아웃]
-//  결과물 폴더: out/헬마드/261005_02/
+//  헬마드 — 카오스 150개 푸쉬업(미국 길거리 괴물 루틴) 편  [headline 레이아웃]
+//  결과물 폴더: out/헬마드/<오늘날짜>_<순번>/
 //
 //  ★ 헤드라인 ≠ 인트로 (분리 케이스)
-//     - 헤드라인(상단 고정): "다리만 올리면 / 몸과 인생이 바뀜"
-//     - 인트로(흰 카드, 녹음 맨 앞 낭독): "별거 아닌 줄 알았는데 / 엄청난 효과가 있었던 자세"
+//     - 헤드라인(상단 고정): "당신을 xx 해버리는 / 미친 푸쉬업 루틴 ㄷㄷ"
+//     - 인트로(흰 카드, 녹음 맨 앞 낭독): "사상 최강이자 최악의 / 고통이라는 푸쉬업 루틴 ㄷㄷ"
 //
 //  자막 타이밍은 녹음 전사(narration.generated.ts)의 타임코드 기준.
-//  텍스트는 STT 오인식을 원본(녹음에서 실제 말한 내용)으로 교정해 아래에 직접 둔다.
-//  오디오: public/audio/261012.mp3 (52.62초)
-//  인트로 문구는 녹음 0~약2.68초에 낭독 → 그 구간 자막 없음.
+//  텍스트는 STT 오인식을 원본으로 교정해 아래에 직접 둔다.
+//  오디오: public/audio/261017.mp3 (51.34초)
+//  인트로 문구는 녹음 0~약2.76초에 낭독 → 그 구간 자막 없음.
+//    (STT 오인식 교정: 마이클 타이슨→마이크 타이슨, 비오드→비오듯, 집고→짚고)
 // ============================================================
 import type { StoryScript } from "../../types";
 import { AUDIO_FILE, AUDIO_DURATION_SEC } from "./narration.generated";
 
 export const helmadScript: StoryScript = {
-  title: "하루에 딱 10분 'L자 다리' 했더니 몸에 벌어진 일 ㄷㄷ",
+  title: "카오스 150개 푸쉬업 - 미국 길거리 괴물 루틴",
   views: "0",
   comments: "0",
 
   // 상단 고정 헤드라인 (인트로 카드와 다름)
   headline: {
-    line1: "다리만 올리면", // 7자
-    line2: "몸과 인생이 바뀜", // 8자
+    line1: "당신을 xx 해버리는",
+    line2: "미친 푸쉬업 루틴 ㄷㄷ",
   },
 
   // 흰 카드 인트로 (녹음 맨 앞 낭독) — 헤드라인과 다른 문구
   intro: {
-    lines: ["별거 아닌 줄 알았는데", "엄청난 효과가 있었던 자세"],
-    durationSec: 2.68, // 녹음에서 인트로 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
+    lines: ["사상 최강이자 최악의", "고통이라는 푸쉬업 루틴 ㄷㄷ"],
+    durationSec: 2.76, // 녹음에서 인트로 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
     sfx: "s11",
   },
 
@@ -37,70 +38,61 @@ export const helmadScript: StoryScript = {
   audioDurationSec: AUDIO_DURATION_SEC,
 
   // ── 자막 트랙: 녹음에서 실제 말한 내용대로, 화면 한 줄에 맞게만 쪼갬. 전사 타임코드 기준. ──
-  //    (STT 오인식 교정: 종이에 서있거나→종일 서있거나)
   narration: [
-    { start: 2.68, text: "단 10분만 누워있어도," },
-    { start: 3.98, text: "피부가 좋아지고" },
-    { start: 4.84, text: "스트레스까지 반토막 나는" },
-    { start: 5.83, text: "자세가 있습니다" },
+    { start: 2.76, text: "미국 길거리 운동 괴물들이" },
+    { start: 4.33, text: "몸을 만들 때 하는" },
+    { start: 4.8, text: "카오스 푸쉬업 루틴입니다" },
 
-    { start: 6.88, text: "돈도, 기구도," },
-    { start: 7.55, text: "힘든 움직임도 필요 없죠" },
+    { start: 6.48, text: "온몸이 불타고, 특히 몸통 체지방이" },
+    { start: 8.34, text: "증발하면서" },
+    { start: 9.06, text: "코어가 아주 돌덩이처럼" },
+    { start: 10.26, text: "강해지는 방법이죠" },
 
-    { start: 9.08, text: "바로 L자 다리 자세인데요," },
-    { start: 10.44, text: "대부분 모르는" },
-    { start: 11.52, text: "놀라운 사실들이 있습니다" },
+    { start: 11.16, text: "일단 엎드려서 손을 짚고 기어나갑니다" },
+    { start: 13, text: "그리고 푸쉬업을 한 번 한 뒤," },
+    { start: 14.37, text: "손으로 한쪽 어깨를 터치" },
+    { start: 15.48, text: "다시 푸쉬업, 반대쪽 어깨 터치" },
+    { start: 17.44, text: "다시 푸쉬업, 한쪽 무릎을 터치" },
+    { start: 19.36, text: "푸쉬업, 반대쪽 무릎 터치" },
+    { start: 20.64, text: "다시 푸쉬업, 한쪽 발 앞꿈치를 터치" },
+    { start: 22.6, text: "푸쉬업, 반대쪽 앞꿈치 터치" },
+    { start: 24.44, text: "다시 푸쉬업, 몸을 굽혀 앞꿈치 터치" },
+    { start: 26.17, text: "푸쉬업, 반대쪽 앞꿈치 터치" },
+    { start: 28.02, text: "푸쉬업," },
+    { start: 28.43, text: "마지막으로 마이크 타이슨 푸쉬업 하나" },
+    { start: 30.72, text: "한 팔 한 팔씩 기어 올라와서" },
+    { start: 32.04, text: "발목 터치하고" },
+    { start: 32.84, text: "스쿼트 한 번 해주고 올라오면 끝입니다" },
 
-    { start: 12.52, text: "일단 피부와 얼굴이 좋아집니다" },
-    { start: 14.12, text: "다리를 올리면 평소보다" },
-    { start: 15.36, text: "많은 혈액과 산소가" },
-    { start: 16.73, text: "얼굴로 올라갑니다" },
-    { start: 17.4, text: "모세혈관이 산소를 공급받고" },
-    { start: 18.71, text: "촉촉해지면서," },
-    { start: 19.88, text: "칙칙하던 안색이 환해지고" },
-    { start: 21.32, text: "피부에 윤기가 돌죠" },
-    { start: 22.44, text: "그래서 서양에선 실제로" },
-    { start: 23.68, text: "돈 안 드는 안티에이징" },
-    { start: 25.14, text: "자세라고 부릅니다" },
+    { start: 34.88, text: "이렇게 하면 한 랩스에 푸쉬업이" },
+    { start: 35.79, text: "몇 개나 들어있을까요?" },
+    { start: 37.2, text: "그리고 이걸 몇 바퀴 돌리면" },
+    { start: 38.01, text: "150개가 될까요?" },
 
-    { start: 26.08, text: "또한 다리를 심장보다" },
-    { start: 27.12, text: "높이 올리면," },
-    { start: 27.76, text: "코르티솔과 심박수가" },
-    { start: 28.76, text: "눈에 띄게 하락하는데요," },
-    { start: 30.04, text: "그래서 불안하고 잠 안 올 때" },
-    { start: 31.36, text: "딱 10분이면," },
-    { start: 32.07, text: "잠이 잘 오고" },
-    { start: 32.74, text: "마음도 편해지게 되죠" },
+    { start: 39.28, text: "중요한 건 중간에 멈추지 않고" },
+    { start: 40.4, text: "리듬을 유지하는 거," },
+    { start: 41.6, text: "그리고 마지막 스쿼트를" },
+    { start: 42.69, text: "절대 빼먹지 않는 겁니다" },
 
-    { start: 33.76, text: "마지막으로," },
-    { start: 34.33, text: "종일 서있거나 앉아있느라" },
-    { start: 35.72, text: "다리에 고여 붓게 만들던 피도," },
-    { start: 37.32, text: "중력 덕분에 정맥을 타고" },
-    { start: 38.64, text: "심장으로 쉽게 되돌아갑니다" },
-    { start: 40.08, text: "그 덕에 붓기랑" },
-    { start: 41, text: "묵직한 피로까지" },
-    { start: 42, text: "눈 녹듯 사라지죠" },
-
-    { start: 42.92, text: "결국 피부, 스트레스," },
-    { start: 44.08, text: "숙면, 혈액순환까지" },
-    { start: 45.31, text: "한 번에 잡는 겁니다" },
-
-    { start: 46.36, text: "방법은 어이없을 만큼 쉬운데," },
-    { start: 47.96, text: "벽이든 침대든" },
-    { start: 48.76, text: "엉덩이 붙이고" },
-    { start: 49.6, text: "다리 쭉 올려서," },
-    { start: 50.54, text: "10분만 눈 감고 있으면 끝입니다" },
+    { start: 43.84, text: "가슴, 어깨, 코어, 하체까지" },
+    { start: 45.32, text: "쉴 틈 없이 털리기 때문에," },
+    { start: 46.64, text: "세트가 끝날 때쯤이면" },
+    { start: 47.82, text: "전신이 불타고," },
+    { start: 48.68, text: "땀이 비오듯 쏟아지는" },
+    { start: 49.66, text: "경험을 하게 되실 겁니다" },
   ],
 
-  // ── 효과음 전환 타이밍(주제 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
+  // ── 효과음 전환 타이밍(주제·동작 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
   cuts: [
-    { start: 2.68, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 후킹(피부·스트레스)
-    { start: 6.88, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 돈·기구 필요없음
-    { start: 9.08, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // L자 다리 공개
-    { start: 12.52, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // ① 피부
-    { start: 26.08, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // ② 신경·숙면
-    { start: 33.76, photo: "", zoom: "out", sfxOnEnter: "s06", lines: [], source: "" }, // ③ 붓기·순환
-    { start: 42.92, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 총정리
-    { start: 46.36, photo: "", zoom: "out", sfxOnEnter: "s07", lines: [], source: "" }, // 방법/마무리
+    { start: 2.76, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 도입(소개)
+    { start: 6.48, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 효과(체지방·코어)
+    { start: 11.16, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 동작 시작(기어나가기)
+    { start: 15.48, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 어깨 터치
+    { start: 19.36, photo: "", zoom: "out", sfxOnEnter: "s03", lines: [], source: "" }, // 무릎 터치
+    { start: 22.6, photo: "", zoom: "in", sfxOnEnter: "s04", lines: [], source: "" }, // 앞꿈치 터치
+    { start: 28.43, photo: "", zoom: "out", sfxOnEnter: "s10", lines: [], source: "" }, // 마이크 타이슨~스쿼트
+    { start: 34.88, photo: "", zoom: "in", sfxOnEnter: "s13", lines: [], source: "" }, // 질문(개수 퀴즈)
+    { start: 39.28, photo: "", zoom: "in", sfxOnEnter: "s06", lines: [], source: "" }, // 핵심 팁(리듬·스쿼트)
+    { start: 43.84, photo: "", zoom: "out", sfxOnEnter: "s07", lines: [], source: "" }, // 마무리(전신·땀)
   ],
 };

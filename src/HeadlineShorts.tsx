@@ -47,6 +47,27 @@ const BOTTOM_BLOCK = {
 // 자막 색: 항상 하양 고정
 const SUBTITLE_COLOR = "#ffffff";
 
+// ── 하단 자막 폰트 크기(전체 통일) ──
+//  자막 글자 영역 가용 폭(px): maxWidth 1000 - 좌우 패딩 30*2 = 940.
+//  ★ 비트마다 크기가 달라지면 자막이 들쭉날쭉하므로, 전체 narration 중
+//    "가장 긴 비트"가 한 줄에 들어가는 크기를 구해 모든 자막에 동일 적용한다.
+const SUBTITLE_BASE_SIZE = 70; // 기준(최대) 크기
+const SUBTITLE_MIN_SIZE = 44; // 너무 작아지지 않게 하한
+const SUBTITLE_MAX_WIDTH = 940;
+// 한 줄 텍스트가 가용 폭에 들어가는 폰트 크기(px)
+const fitOneLine = (text: string): number => {
+  const perChar = 0.95; // Pretendard italic 700 + letterSpacing -1.5 기준 근사
+  const estWidth = text.length * SUBTITLE_BASE_SIZE * perChar;
+  if (estWidth <= SUBTITLE_MAX_WIDTH) return SUBTITLE_BASE_SIZE;
+  return Math.floor(SUBTITLE_MAX_WIDTH / (text.length * perChar));
+};
+// 전체 비트를 보고 가장 긴 비트 기준 "하나의" 폰트 크기로 통일
+const unifiedSubtitleSize = (texts: string[]): number => {
+  const sizes = texts.map(fitOneLine);
+  const min = sizes.length ? Math.min(...sizes) : SUBTITLE_BASE_SIZE;
+  return Math.max(SUBTITLE_MIN_SIZE, min);
+};
+
 // 굵은 텍스트용 검정 외곽선 (여러 방향 그림자)
 const OUTLINE = (px: number, color = "#000") =>
   [
@@ -112,7 +133,7 @@ const TopBlock: React.FC<{ line1: string; line2: string }> = ({ line1, line2 }) 
 
 // ── 하단 자막: 흰 글자만 (배경·외곽선 없음). 배경은 main의 하단 바가 담당. ──
 // sub 파일에선 이 글자만 투명 위에 얹혀 나오고, main의 검정 하단 바 위에 겹쳐진다.
-const NarrationLine: React.FC<{ text: string }> = ({ text }) => {
+const NarrationLine: React.FC<{ text: string; fontSize: number }> = ({ text, fontSize }) => {
   return (
     <div
       style={{
@@ -132,11 +153,13 @@ const NarrationLine: React.FC<{ text: string }> = ({ text }) => {
           padding: "0 30px",
           fontFamily: BODY_FONT, // Pretendard
           fontWeight: 700,
-          fontSize: 70,
+          fontStyle: "italic", // 자막 항상 이탤릭
+          fontSize, // 전체 자막 통일 크기(상위에서 계산)
           lineHeight: 1.2,
           letterSpacing: -1.5,
           textAlign: "center",
           color: "#ffffff", // 흰 글자 (까만 배경 위에 얹음)
+          whiteSpace: "nowrap", // 한 줄 유지 (통일 폰트로 폭 보장)
         }}
       >
         {text}
@@ -230,6 +253,9 @@ export const HeadlineShorts: React.FC<{
     //    인트로 문장 낭독 중 본문 자막이 겹치는 것을 구조적으로 방지.
     .filter((b) => b.startFrame >= introDur);
 
+  // ★ 자막 폰트는 전체 비트 통일(가장 긴 비트 기준). 비트마다 크기가 변하지 않게.
+  const subtitleFontSize = unifiedSubtitleSize(timedBeats.map((b) => b.text));
+
   return (
     <AbsoluteFill style={{ background: bg }}>
       {/* 내레이션 오디오 (main·full 에만 삽입 — 자막 파일엔 넣지 않음) */}
@@ -276,7 +302,7 @@ export const HeadlineShorts: React.FC<{
       {showSubsText &&
         timedBeats.map((b, i) => (
           <Sequence key={`beat-${i}`} from={b.startFrame} durationInFrames={b.durationInFrames} layout="none">
-            <NarrationLine text={b.text} />
+            <NarrationLine text={b.text} fontSize={subtitleFontSize} />
           </Sequence>
         ))}
 

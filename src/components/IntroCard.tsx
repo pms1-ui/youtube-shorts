@@ -14,12 +14,29 @@ import { BODY_FONT } from "../fonts";
 
 const HIGHLIGHT = "#a9cbe8"; // 연파랑 형광펜 색
 
+// 인트로 흰카드 한 줄 기준 폰트(px)와 가용 폭(px).
+//  카드 폭 = 화면 1080. 좌우 안전여백 50px씩 → 980px 안에 한 줄이 들어와야 짤리지 않음.
+const INTRO_BASE_SIZE = 74;
+const INTRO_MAX_WIDTH = 980;
+// 한글 볼드(800) + letterSpacing -1 기준 평균 글자폭 ≈ fontSize * 0.98.
+//  긴 줄이 가용 폭을 넘치면 폰트를 자동 축소해 nowrap 상태에서도 짤리지 않게 한다.
+const fitIntroSize = (lines: string[]): number => {
+  const perChar = 0.98;
+  const longest = lines.reduce((m, l) => Math.max(m, l.length), 0);
+  const estWidth = longest * INTRO_BASE_SIZE * perChar;
+  if (estWidth <= INTRO_MAX_WIDTH) return INTRO_BASE_SIZE;
+  return Math.floor(INTRO_MAX_WIDTH / (longest * perChar));
+};
+
 export const IntroCard: React.FC<{
   lines: string[];
   durationInFrames: number;
 }> = ({ lines, durationInFrames }) => {
   const frame = useCurrentFrame();
   const { width } = useVideoConfig();
+
+  // 가장 긴 줄 기준 폰트 자동 축소(한 줄이 카드 폭을 넘지 않도록)
+  const introFontSize = fitIntroSize(lines);
 
   // ── 타임라인 ──────────────────────────────────────────────
   const fadeIn = 4; // 아주 짧게 등장
@@ -99,7 +116,7 @@ export const IntroCard: React.FC<{
             style={{
               fontFamily: BODY_FONT,
               fontWeight: 800,
-              fontSize: 74,
+              fontSize: introFontSize,
               letterSpacing: -1,
               color: "#141414",
               lineHeight: 1.15,
