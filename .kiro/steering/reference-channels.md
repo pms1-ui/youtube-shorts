@@ -11,6 +11,13 @@
 - **That's Good Money**
   - 미국 길거리/감옥 스타일 고반복 맨몸운동. 예: "150 Push Up Routine"(카오스 푸쉬업) → 261017 편 소스.
   - 채널 핸들: https://www.youtube.com/@thatsgoodmoney
+- **Дикий Лось** (러시아어, "야생 무스/엘크")
+  - 러시아어 채널. 자막이 러시아어일 수 있으니 추출 시 `--sub-langs "ru,ru-orig,en,en-US"`로 받고,
+    내용 파악 후 헬마드 톤 한국어로 재구성한다.
+
+### 틱톡(TikTok)
+- **@thulani_chipanga** (틱톡)
+  - 플레이트/덤벨 전신 서킷 계열. 예: "FULL BODY CIRCUIT"(플레이트 1장: Floor to Press / Squat to Press / Overhead Lunges / Overhead Plate March).
 
 ## 자막 추출 방법 (로컬)
 
@@ -19,6 +26,12 @@
 - 제목만 빠르게: oEmbed `https://www.youtube.com/oembed?url=<URL>&format=json`
 - 웹 fetch로 유튜브 페이지 직접 긁기는 JS 렌더라 안 됨. timedtext 익명 접근도 막혀 있음 → yt-dlp 사용.
 - 임시 자막(`_yt/`, `_yt_log.txt`)은 작업 후 삭제.
+
+### 틱톡 추출 방법
+- 틱톡은 음성 자막(STT)이 없다. 대신 **캡션/설명**이 메타데이터에 들어있음.
+- 명령: `yt-dlp --skip-download --write-info-json -o "_tt/%(id)s" "<URL>"`
+- info.json에서 `description`(= 캡션, 운동 구성이 보통 여기 적혀 있음), `uploader`, `duration`을 읽는다.
+- 임시(`_tt/`, `_tt_log.txt`)는 작업 후 삭제.
 
 ## 재구성 원칙
 
