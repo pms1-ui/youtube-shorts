@@ -1,21 +1,22 @@
 // ============================================================
 //  채널 렌더 헬퍼
 //  · 결과물은 채널별 + 편별 하위 폴더로: out/<채널한글명>/<YYMMDD>_<순번>/
-//    예) out/헬마드/260930_01/260930_헬마드_sub.mov
-//    → 한 편(스크립트물) = 하위 폴더 하나. 5종(main/sub/sfx/통짜/썸네일)이 그 안에 모임.
+//    예) out/헬마드/260930_01/260930_헬마드_main.mp4
+//    → 한 편(스크립트물) = 하위 폴더 하나.
+//  · 실제 편집에 쓰는 건 main.mp4 + sfx.mp3 2종. (화면 자막은 vrew로 직접 작업)
 //  · 순번(2자리)은 같은 날짜 안에서 01, 02, ... 로 증가.
 //  사용법:
 //    node scripts/render.mjs <채널> [옵션]
 //    옵션:
-//      (없음)     통짜 영상(미리보기용, 상단+미디어+자막 합본)
+//      (없음)     기본 — main + sfx 2종만 렌더 (편집용)
 //      --main     상단바+인트로+빈 중앙+하단바(소리 없음) → _main.mp4
-//      --subs     자막 흰 글자만(투명 배경, ProRes mov)    → _sub.mov
 //      --sfx      효과음만                                 → _sfx.mp3
-//      --split    --main, --subs, --sfx 모두 렌더 (편집용 3파일)
-//      --thumb    게시물 썸네일 이미지                     → .png
+//      --subs     자막 흰 글자만(투명 mov) → _sub.mov  (평소 불필요, vrew로 대체)
+//      --full     통짜 미리보기 영상 → .mp4           (필요할 때만)
+//      --thumb    게시물 썸네일 이미지 → .png          (필요할 때만)
 //      --new      그날의 새 편으로(순번 +1) 새 폴더 생성
 //      --seq=NN   순번을 직접 지정(예: --seq=02)
-//    예) node scripts/render.mjs helmad --split --new
+//    예) node scripts/render.mjs helmad --new   (새 편 main+sfx)
 // ============================================================
 import { execSync } from "child_process";
 import fs from "fs";
@@ -33,13 +34,13 @@ const isThumb = args.includes("--thumb");
 const isMain = args.includes("--main");
 const isSubs = args.includes("--subs");
 const isSfx = args.includes("--sfx");
-const isSplit = args.includes("--split");
+const isFull = args.includes("--full");
 const isNew = args.includes("--new");
 const seqArg = args.find((a) => a.startsWith("--seq="));
 const dateArg = args.find((a) => a.startsWith("--date="));
 
 if (!id || !CHANNELS[id]) {
-  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--subs|--sfx|--split|--thumb|--new|--seq=NN|--date=YYMMDD]");
+  console.error("사용법: node scripts/render.mjs <" + Object.keys(CHANNELS).join("|") + "> [--main|--sfx|--subs|--full|--thumb|--new|--seq=NN|--date=YYMMDD]");
   process.exit(1);
 }
 
@@ -164,19 +165,22 @@ if (isThumb) {
   const out = path.join(outDir, `${base}.png`);
   run(`npx remotion still ${comp}Thumbnail "${out}" --overwrite`);
   console.log("✓ 썸네일:", out);
-} else if (isSplit) {
-  renderMain();
-  renderSubs();
-  renderSfx();
 } else if (isMain) {
   renderMain();
 } else if (isSubs) {
+  // 자막 트랙 mov — 현재는 화면 자막을 vrew로 직접 만들기 때문에 평소엔 안 씀.
+  // 필요할 때만 명시적으로 --subs 로 생성.
   renderSubs();
 } else if (isSfx) {
   renderSfx();
-} else {
-  // 통짜(미리보기)
+} else if (isFull) {
+  // 통짜(미리보기) — 명시할 때만. (--full)
   const out = path.join(outDir, `${base}.mp4`);
   run(`npx remotion render ${comp} "${out}" --crf=18`);
   console.log("✓ 통짜:", out);
+} else {
+  // 기본: 실제 편집에 쓰는 2종만 (main + sfx).
+  // (--split 도 동일하게 2종. 자막 mov/통짜/썸네일은 각각 --subs/--full/--thumb 로 따로.)
+  renderMain();
+  renderSfx();
 }
