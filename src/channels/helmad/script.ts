@@ -1,36 +1,35 @@
 // ============================================================
-//  헬마드 — 맨몸 하체 루틴(세계적 트레이너 / 플레이트 없이 하체·엉덩이) 편  [headline 레이아웃]
-//  결과물 폴더: out/헬마드/<오늘날짜>_<순번>/
-//  소스: TikTok @thulani_chipanga (맨몸 하체 서킷)
+//  헬마드 — 달리기(러닝) 페이스 개빨라지는 법 편  [headline 레이아웃]
+//  결과물 폴더: out/헬마드/<오늘날짜>_<순번>/ (261017_05)
 //
-//  ★ 헤드라인 ≠ 인트로 (분리 케이스)
-//     - 헤드라인(상단 고정): "집에서 하체 엉덩이 터는 / 세계적 트레이너 루틴 ㄷㄷ"
-//     - 인트로(흰 카드, 녹음 맨 앞 낭독): "집에서 최강의 하체를 만드는 / 초간단 15세트 맨몸 운동 루틴"
+//  ★ 헤드라인 = 인트로 (동일 문구 케이스)
+//     - 헤드라인(상단 고정) = 인트로(흰 카드/낭독):
+//       "러닝 페이스를 폭발적으로 / 증가시키는 가장 빠른 방법"
 //
 //  자막 타이밍은 녹음 전사(narration.generated.ts)의 타임코드 기준.
-//  텍스트는 STT 오인식을 원본으로 교정해 아래에 직접 둔다.
-//  오디오: public/audio/261020.mp3 (54.78초)
-//  인트로 문구는 녹음 0~약3.62초에 낭독 → 그 구간 자막 없음.
-//    (STT 오인식 교정: 중등근→중둔근, 커트시런지 띄어쓰기)
+//  텍스트는 STT 오인식을 원본 대본으로 교정해 아래에 직접 둔다.
+//  오디오: public/audio/261024.mp3 (57.6초)
+//  인트로 문구는 녹음 0~2.7초에 낭독 → 그 구간엔 하단 자막 없음.
+//    (STT 오인식 교정: "떨거나야"→"떨궈놔야", "포미고"→"폼이고", "내리 꽂는"→"내리꽂는")
 // ============================================================
 import type { StoryScript } from "../../types";
 import { AUDIO_FILE, AUDIO_DURATION_SEC } from "./narration.generated";
 
 export const helmadScript: StoryScript = {
-  title: "세계적 트레이너의 맨몸 하체 루틴",
+  title: "달리기(러닝) 페이스 개빨라지는 법 (효과 직빵)",
   views: "0",
   comments: "0",
 
-  // 상단 고정 헤드라인 (인트로 카드와 다름)
+  // 상단 고정 헤드라인 (= 인트로 동일 문구)
   headline: {
-    line1: "집에서 하체 엉덩이 터는",
-    line2: "세계적 트레이너 루틴 ㄷㄷ",
+    line1: "러닝 페이스를 폭발적으로",
+    line2: "증가시키는 가장 빠른 방법",
   },
 
-  // 흰 카드 인트로 (녹음 맨 앞 낭독) — 헤드라인과 다른 문구
+  // 흰 카드 인트로 (녹음 맨 앞 낭독) — 헤드라인과 동일 문구
   intro: {
-    lines: ["집에서 최강의 하체를 만드는", "초간단 15세트 맨몸 운동 루틴"],
-    durationSec: 3.62, // 녹음에서 인트로 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
+    lines: ["러닝 페이스를 폭발적으로", "증가시키는 가장 빠른 방법"],
+    durationSec: 2.7, // 녹음에서 인트로 낭독이 끝나는 시점(전사 기준). 이 구간엔 자막 없음.
     sfx: "s11",
   },
 
@@ -38,55 +37,54 @@ export const helmadScript: StoryScript = {
   audioFile: AUDIO_FILE,
   audioDurationSec: AUDIO_DURATION_SEC,
 
-  // ── 자막 트랙: 녹음에서 실제 말한 내용대로, 화면 한 줄에 맞게만 쪼갬. 전사 타임코드 기준. ──
+  // ── 자막 트랙: 전사 타임코드 기준으로 문장/구 단위로 묶음. 텍스트는 원본 대본으로 교정. ──
   narration: [
-    { start: 3.62, text: "여기 세계적인 트레이너가 소개하는" },
-    { start: 5.28, text: "미친 맨몸 하체 운동 루틴이 있습니다" },
-    { start: 7.26, text: "장비 하나 없이 집에서" },
-    { start: 8.46, text: "하체와 엉덩이를 완전히 털어버릴 수 있죠" },
-    { start: 10.5, text: "여기에 심박수까지 치솟게 하는 형태로" },
-    { start: 12.42, text: "체지방 연소가 미친 듯 잘 됩니다" },
+    { start: 2.7, text: "헬스나 근력운동 좋아하시는 분들은" },
+    { start: 4.4, text: "러닝할 때 1km당 평균 페이스를 6분 또는" },
+    { start: 7.14, text: "5분 이내로 줄이기 정말 힘드실 겁니다" },
 
-    { start: 14.02, text: "첫째, 기본 스쿼트" },
-    { start: 15.12, text: "발을 어깨너비로 벌리고" },
-    { start: 15.87, text: "깊게 앉았다 일어나기, 스무 번" },
-    { start: 18.22, text: "하체 전체를 깨우는 워밍업입니다" },
+    { start: 8.92, text: "유튜브 보면서 폼 교정하고 호흡법 배우고" },
+    { start: 11.28, text: "비싼 신발까지 샀는데" },
+    { start: 12.4, text: "기록이 정체되시는 분들도 정말 많습니다" },
 
-    { start: 20.26, text: "둘째, 커트시 런지" },
-    { start: 21.36, text: "뒷발을 반대쪽 대각선으로 빼면서 앉는데," },
-    { start: 23.9, text: "평소 안 쓰던 엉덩이 바깥쪽," },
-    { start: 25.32, text: "즉 중둔근을 제대로 때려줍니다" },
-    { start: 26.99, text: "한 다리당 하나로 해서 좌우 열 번씩" },
+    { start: 14.4, text: "경험상, 이러한 현상의 진짜 장애물은 따로 있습니다" },
+    { start: 17.2, text: "절반 이상은 여기에 해당되는데," },
+    { start: 18.78, text: "바로 몸무게, 체중입니다" },
 
-    { start: 28.9, text: "셋째, 스텝 아웃 스쿼트" },
-    { start: 30.18, text: "한 발씩 옆으로 내디디며 앉는 동작으로," },
-    { start: 32.28, text: "안쪽 허벅지와 엉덩이 측면을 같이 자극하죠" },
-    { start: 34.56, text: "좌우 각각 열다섯 번씩" },
+    { start: 20.12, text: "러닝은 체중을 공중에 띄웠다 내리꽂는 운동이라," },
+    { start: 22.52, text: "1kg만 더 쪄 있어도 한 걸음마다 3kg 넘는 충격이" },
+    { start: 25.56, text: "발목 무릎 허리에 반복해서 꽂힙니다" },
 
-    { start: 35.16, text: "넷째, 점프 스쿼트" },
-    { start: 36.86, text: "앉았다가 폭발적으로 뛰어오르기입니다" },
-    { start: 38.73, text: "여기서 심박수가 확 올라갑니다" },
-    { start: 40.18, text: "한번 할 때 열다섯 개입니다" },
+    { start: 27.5, text: "따라서 체중이 뒤에 말씀드릴 해당 기준 이상이면" },
+    { start: 30.1, text: "부상의 위험도 기하급수적으로 높아지는데요," },
+    { start: 32.3, text: "무거운 몸으로 억지로 페이스 올리는 건" },
+    { start: 34, text: "사실상 굉장히 어렵기도 하고," },
+    { start: 35.5, text: "하더라도 관절 수명이 저하됩니다" },
 
-    { start: 41.52, text: "마지막, 교차 런지" },
-    { start: 42.52, text: "앞뒤로 벌려 두 번 꾹꾹 눌러주고," },
-    { start: 44.22, text: "가볍게 점프하면서 다리를 교차해 바꿔주는 동작입니다" },
-    { start: 47.02, text: "좌우 열 번씩" },
+    { start: 37.1, text: "그래서 러닝을 정말 잘 하고 싶다면," },
+    { start: 38.39, text: "체중 감량이 필수인 건데," },
+    { start: 40, text: "언덕 걷기나 가벼운 조깅을 추천드리고," },
 
-    { start: 47.86, text: "여기까지의 동작을 한 바퀴로 해서," },
-    { start: 49.16, text: "총 3세트 반복해주시면 되고," },
-    { start: 50.62, text: "익숙해지시면 각 운동의 개수와 세트 수를" },
-    { start: 52.21, text: "늘려나가시면 되겠습니다" },
+    { start: 42.1, text: "놀라운 건, 딱 5kg만 빼도" },
+    { start: 43.81, text: "평균 페이스가 20초에서 50초까지 단축될 수 있습니다" },
+
+    { start: 46.6, text: "남자는 175cm 기준 70kg 미만," },
+    { start: 49.1, text: "여자는 160cm 기준 50kg 미만으로는 떨궈놔야" },
+    { start: 52.4, text: "페이스 올릴 준비가 된 거라 볼 수 있습니다" },
+
+    { start: 54.3, text: "폼이고 영양제고, 그냥 살을 빼세요" },
+    { start: 56.21, text: "그게 제일 빠릅니다" },
   ],
 
-  // ── 효과음 전환 타이밍(동작 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
+  // ── 효과음 전환 타이밍(주제 전환점에 맞춤). photo는 폴백값(main엔 미표시) ──
   cuts: [
-    { start: 3.62, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 서론(소개)
-    { start: 14.02, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // ① 기본 스쿼트
-    { start: 20.26, photo: "", zoom: "out", sfxOnEnter: "s02", lines: [], source: "" }, // ② 커트시 런지
-    { start: 28.9, photo: "", zoom: "in", sfxOnEnter: "s03", lines: [], source: "" }, // ③ 스텝아웃 스쿼트
-    { start: 35.16, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // ④ 점프 스쿼트
-    { start: 41.52, photo: "", zoom: "in", sfxOnEnter: "s10", lines: [], source: "" }, // ⑤ 교차 런지
-    { start: 47.86, photo: "", zoom: "out", sfxOnEnter: "s07", lines: [], source: "" }, // 마무리(세트·진행법)
+    { start: 2.7, photo: "", zoom: "in", sfxOnEnter: "s08", lines: [], source: "" }, // 서론(헬스인 공감 훅)
+    { start: 8.92, photo: "", zoom: "in", sfxOnEnter: "s01", lines: [], source: "" }, // 폼·호흡·신발 다 해봤는데
+    { start: 14.4, photo: "", zoom: "out", sfxOnEnter: "s09", lines: [], source: "" }, // 진짜 장애물 = 체중
+    { start: 20.12, photo: "", zoom: "in", sfxOnEnter: "s02", lines: [], source: "" }, // 충격·관절
+    { start: 27.5, photo: "", zoom: "out", sfxOnEnter: "s06", lines: [], source: "" }, // 부상 위험·제자리걸음
+    { start: 37.1, photo: "", zoom: "in", sfxOnEnter: "s07", lines: [], source: "" }, // 감량이 답·처방
+    { start: 42.1, photo: "", zoom: "out", sfxOnEnter: "s04", lines: [], source: "" }, // 5kg면 20~50초
+    { start: 46.6, photo: "", zoom: "in", sfxOnEnter: "s05", lines: [], source: "" }, // 목표 체중 기준
   ],
 };
